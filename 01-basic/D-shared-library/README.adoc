@@ -8,7 +8,7 @@ toc::[]
 
 Shows a hello world example which first creates and links a shared library.
 
-This also shows how to create an link:https://cmake.org/cmake/help/v3.0/manual/cmake-buildsystem.7.html#alias-targets[alias target]
+This also shows how to create an link:https://cmake.org/cmake/help/v3.0/manual/cmake-buildsystem.7.html#alias-targets[alias target(别名目标)]
 
 The files in this tutorial are below:
 
@@ -32,7 +32,7 @@ $ tree
 
 # Concepts
 
-## Adding a Shared Library
+## Adding a Shared Library（创建动态库）
 
 As with the previous example on static libraries, the +add_library()+ function
 is also used to create a shared library from some source files.
@@ -50,7 +50,7 @@ the sources passed to the +add_library()+ function.
 
 ## Alias Target
 
-As the name suggests an link:https://cmake.org/cmake/help/v3.0/manual/cmake-buildsystem.7.html#alias-targets[alias target] is an alternative name for a target that can be used instead of the real target name in read-only contexts.
+As the name suggests an link:https://cmake.org/cmake/help/v3.0/manual/cmake-buildsystem.7.html#alias-targets[alias target] is an alternative name for a target that can be used instead of the real target name in read-only contexts.(顾名思义，别名目标是目标的替代名称，可以在只读上下文中使用，而不是实际目标名称。)
 
 [source,cmake]
 ----
@@ -76,7 +76,8 @@ target_link_libraries(hello_binary
 )
 ----
 
-This tells CMake to link the hello_library against the hello_binary executable using the alias target name.
+This tells CMake to link the hello_library against the hello_binary executable using the alias target name(
+这告诉Cmake把hello_library链接到hello_binary的别名hello::library上）.
 
 An example of this being called by the linker is
 

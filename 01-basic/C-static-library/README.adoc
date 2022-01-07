@@ -32,9 +32,10 @@ $ tree
 
 # Concepts
 
-## Adding a Static Library
+## Adding a Static Library(创建静态库)
 
-The +add_library()+ function is used to create a library from some source files.
+The +add_library()+ function is used to create a library from some source files.（the 
++add_library()+命令通过若干个源文件创建库）
 This is called as follows:
 
 [source,cmake]
@@ -50,37 +51,40 @@ the sources in the +add_library+ call.
 [NOTE]
 ====
 As mentioned in the previous example, we pass the source files directly to the
-+add_library+ call, as recommended for modern CMake.
++add_library+ call（直接把源文件传递给+add_library命令）, as recommended for modern CMake.
 ====
 
-## Populating Including Directories
+## Populating Including Directories（填充包括目录）
 
-In this example, we include directories in the library using the +target_include_directories()+ function with the scope set to +PUBLIC+.
+In this example, we include directories in the library（我们把（头）文件放入库中） using the +target_include_directories()+ function with the scope set to +PUBLIC+.
 
 [source,cmake]
 ----
 target_include_directories(hello_library
     PUBLIC 
         ${PROJECT_SOURCE_DIR}/include
+        #${PROJECT_SOURCE_DIR}路径
 )
 ----
 
 This will cause the included directory used in the following places:
 
-* When compiling the library
-* When compiling any additional target that links the library.
+* When compiling the library（当编译库时）
+* When compiling any additional target that links the library.（当编译任何链接该库的目标时）
 
-The meaning of scopes are:
+The meaning of scopes are（作用域如下）:
 
-* +PRIVATE+ - the directory is added to this target's include directories
+* +PRIVATE+ - the directory is added to this target's include directories（这个文件被
+添加到目标的“包括目录下”）
 * +INTERFACE+ - the directory is added to the include directories for any targets that link this library.
+（接口 这个文件被添加到“包括目录”下为任何链接到这个库的目标使用）
 * +PUBLIC+ - As above, it is included in this library and also any targets that link this library.
-
+（同时添加到库的“包括目录”和目标的“包括目录”下）
 
 [TIP]
 ====
 For public headers it is often a good idea to have your include folder be "namespaced"
-with sub-directories. 
+with sub-directories（？？？）. 
 
 The directory passed to +target_include_directories+ will be the root of your 
 include directory tree and your C++ files should include the path from there to your header.
@@ -95,10 +99,11 @@ Using this method means that there is less chance of header filename clashes whe
 you use multiple libraries in your project. 
 ====
 
-## Linking a Library
+## Linking a Library（链接一个库）
 
 When creating an executable that will use your library you must tell the compiler
-about the library. This can be done using the +target_link_libraries()+ function.
+about the library（当创建一个使用某库的可执行文件时需要告诉编译器你要用这个库）. This 
+can be done using the +target_link_libraries()+ function.
 
 [source,cmake]
 ----
@@ -113,7 +118,7 @@ target_link_libraries( hello_binary
 ----
 
 This tells CMake to link the hello_library against the hello_binary executable
-during link time. It will also propagate any include directories with +PUBLIC+ or +INTERFACE+ scope
+during link time. It will also propagate(传播) any include directories with +PUBLIC+ or +INTERFACE+ scope
  from the linked library target.
 
 An example of this being called by the compiler is

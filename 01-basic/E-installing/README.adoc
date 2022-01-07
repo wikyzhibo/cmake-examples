@@ -38,7 +38,13 @@ $ tree
 CMake offers the ability to add a `make install` target to allow a user to
 install binaries, libraries and other files. The base install location is controlled
 by the variable +CMAKE_INSTALL_PREFIX+ which can be set using ccmake or by calling
-cmake with `cmake .. -DCMAKE_INSTALL_PREFIX=/install/location`
+cmake with `cmake .. -DCMAKE_INSTALL_PREFIX=/install/location`(默认安装位置可以通过变量
++CMAKE_INSTALL_PREFIX+进行控制，这个变量可以通过使用ccmake或使用命令..)
+[NOTE]
+====
+根目录默认为CMAKE_INSTALL_PREFIX,可以试用set方法进行指定，如果使用默认值的话，
+Unix系统的默认值为 /usr/local, Windows的默认值为 c:/Program Files/${PROJECT_NAME}。
+====
 
 The files that are installed are controlled by the https://cmake.org/cmake/help/v3.0/command/install.html[+install()+] function.
 
